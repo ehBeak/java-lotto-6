@@ -17,4 +17,12 @@ public class LottoFactory {
         randomNumbers.sort(null);
         return new Lotto(randomNumbers);
     }
+
+    public Lotto createPrizeLotto(List<String> LottoNumbers) {
+        List<Integer> prizeLottoNumbers =
+                LottoNumbers.stream()
+                        .map(Integer::parseInt)
+                        .toList();
+        return new Lotto(prizeLottoNumbers);
+    }
 }
