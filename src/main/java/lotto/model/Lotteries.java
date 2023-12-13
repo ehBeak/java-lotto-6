@@ -10,4 +10,7 @@ public class Lotteries {
         this.lotteries = lotteries;
     }
 
+    public int getIssuedLotteries() {
+        return lotteries.size();
+    }
 }

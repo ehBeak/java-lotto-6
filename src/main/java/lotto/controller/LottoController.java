@@ -16,5 +16,6 @@ public class LottoController {
 
     public void generateLotto() {
         Lotteries lotteries = inputView.inputLottoPrice();
+        outputView.printLottoCount(lotteries.getIssuedLotteries());
     }
 }
