@@ -11,10 +11,10 @@
 
 ### 로또를 발행하는 기능
 - [X] 총 몇개의 로또를 생성하는지 계산
-- [ ] 로또 번호 6개를 무작위로 생성
-    - [ ] List<Integer> numbers = Randoms.pickUniqueNumbersInRange(1, 45, 6);
-    - [ ] 각 로또 번호 범위는 1~45
-    - [ ] 각 6개의 번호는 중복되지 않는다.
+- [X] 로또 번호 6개를 무작위로 생성
+    - [X] List<Integer> numbers = Randoms.pickUniqueNumbersInRange(1, 45, 6);
+    - [X] 각 로또 번호 범위는 1~45
+    - [X] 각 6개의 번호는 중복되지 않는다.
 - [ ] 위에서 계산한 값으로 로또를 생성
 - [ ] 로또 번호는 오름차순으로 정렬한다.
 
