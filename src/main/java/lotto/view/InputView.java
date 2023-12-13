@@ -1,6 +1,7 @@
 package lotto.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.List;
 import lotto.factory.LotteriesFactory;
 import lotto.model.Lotteries;
 import lotto.util.LottoIssueNumberCalculator;
@@ -9,6 +10,7 @@ import lotto.util.validation.UserInputValidator;
 public class InputView {
 
     public static final String INPUT_LOTTO_PRICE = "구입금액을 입력해 주세요.";
+    public static final String INPUT_PRIZE_LOTTO_NUMBER = "구입금액을 입력해 주세요.";
 
     private final LotteriesFactory lotteriesFactory;
 
@@ -22,5 +24,11 @@ public class InputView {
         int lottoPrice = UserInputValidator.validateLottoPrice(userInput);
         int countIssuedLotto = LottoIssueNumberCalculator.countIssuedLotto(lottoPrice);
         return lotteriesFactory.creatLotteries(countIssuedLotto);
+    }
+
+    public void inputPrizeLottoNumbers() {
+        System.out.println(INPUT_PRIZE_LOTTO_NUMBER);
+        String userInput = Console.readLine();
+        List<String> lottoNumbers = UserInputValidator.validateLottoNumbers(userInput);
     }
 }
