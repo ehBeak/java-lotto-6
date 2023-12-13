@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import java.util.List;
 import lotto.model.Lotteries;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -17,5 +18,7 @@ public class LottoController {
     public void generateLotto() {
         Lotteries lotteries = inputView.inputLottoPrice();
         outputView.printLottoCount(lotteries.getIssuedLotteries());
+        outputView.printLotteriesNumber(lotteries.getIssuedLottoNumbers());
+
     }
 }

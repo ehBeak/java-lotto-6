@@ -23,7 +23,9 @@ public class Lotto {
     }
 
     // TODO: 추가 기능 구현
-    public void sortLottoNumbers() {
-
+    public List<String> getLottoNumbers() {
+        return numbers.stream()
+                .map(String::valueOf)
+                .toList();
     }
 }

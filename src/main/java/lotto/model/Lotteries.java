@@ -13,4 +13,10 @@ public class Lotteries {
     public int getIssuedLotteries() {
         return lotteries.size();
     }
+
+    public List<List<String>> getIssuedLottoNumbers() {
+        return lotteries.stream()
+                .map(Lotto::getLottoNumbers)
+                .toList();
+    }
 }
