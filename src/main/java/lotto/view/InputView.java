@@ -39,9 +39,10 @@ public class InputView {
         return lottoFactory.createPrizeLotto(lottoNumbers);
     }
 
-    public void inputBonusNumber() {
+    public PrizeLotto inputBonusNumber(Lotto prizeLotto) {
         System.out.println(INPUT_BONUS_NUMBER);
         String userInput = Console.readLine();
         int bonusNumber = UserInputValidator.validateBonusNumber(userInput);
+        return new PrizeLotto(prizeLotto, bonusNumber);
     }
 }

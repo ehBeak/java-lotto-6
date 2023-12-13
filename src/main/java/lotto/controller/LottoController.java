@@ -1,6 +1,8 @@
 package lotto.controller;
 
 import lotto.model.Lotteries;
+import lotto.model.Lotto;
+import lotto.model.PrizeLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -18,7 +20,7 @@ public class LottoController {
         Lotteries lotteries = inputView.inputLottoPrice();
         outputView.printLottoCount(lotteries.getIssuedLotteries());
         outputView.printLotteriesNumber(lotteries.getIssuedLottoNumbers());
-        inputView.inputPrizeLottoNumbers();
-        inputView.inputBonusNumber();
+        Lotto lotto = inputView.inputPrizeLottoNumbers();
+        PrizeLotto prizeLotto = inputView.inputBonusNumber(lotto);
     }
 }
