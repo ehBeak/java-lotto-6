@@ -8,7 +8,7 @@ public class OutputView {
 
     private static final String LOTTO_COUNT_MESSAGE = "%s개를 구매했습니다.";
     private static final String LOTTO_FORMAT = "[%s]";
-    private static final String PRIZE_RESULT_MESSAGE = "당첨 통계\n---";
+    private static final String PRIZE_RESULT_MESSAGE = "\n당첨 통계\n---";
     private static final String PRIZE_RESULT_FORMAT = "%s - %d개";
 
     public void printLottoCount(int lottoCount) {
