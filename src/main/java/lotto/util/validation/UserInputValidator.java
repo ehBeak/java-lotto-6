@@ -9,10 +9,11 @@ public class UserInputValidator {
     private static final int ZERO = 0;
     private static final int LOTTO_PRICE = 1000;
 
-    public static void validateLottoPrice(String lottoPrice) {
+    public static int validateLottoPrice(String lottoPrice) {
         int lottoPriceNumber = validateNumber(lottoPrice);
         validatePositiveNumber(lottoPriceNumber);
         validateMultipleOfThousand(lottoPriceNumber);
+        return lottoPriceNumber;
     }
 
     private static int validateNumber(String lottoPrice) {
