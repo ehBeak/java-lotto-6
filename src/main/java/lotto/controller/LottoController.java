@@ -19,5 +19,6 @@ public class LottoController {
         outputView.printLottoCount(lotteries.getIssuedLotteries());
         outputView.printLotteriesNumber(lotteries.getIssuedLottoNumbers());
         inputView.inputPrizeLottoNumbers();
+        inputView.inputBonusNumber();
     }
 }

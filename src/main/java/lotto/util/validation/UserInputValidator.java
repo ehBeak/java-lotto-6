@@ -1,7 +1,10 @@
 package lotto.util.validation;
 
+import static lotto.exception.ErrorMessage.INVALID_BONUS_NUMBER;
 import static lotto.exception.ErrorMessage.INVALID_LOTTO_NUMBERS_FORMAT;
 import static lotto.exception.ErrorMessage.INVALID_PRICE;
+import static lotto.exception.ErrorMessage.NUMBER_ALLOWED;
+import static lotto.exception.ErrorMessage.POSITIVE_NUMBER_ALLOWED;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,6 +16,8 @@ public class UserInputValidator {
 
     private static final int ZERO = 0;
     private static final int LOTTO_PRICE = 1000;
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 45;
     private static final String DELIMITER = ",";
     private static final String LOTTO_NUMBERS_PATTERN = "^[0-9,]*$";
 
@@ -30,17 +35,24 @@ public class UserInputValidator {
         return Arrays.asList(lottoNumbers.split(DELIMITER));
     }
 
+    public static int validateBonusNumber(String inputBonusNumber) {
+        int bonusNumber = validateNumber(inputBonusNumber);
+        validatePositiveNumber(bonusNumber);
+        validateNumberRange(bonusNumber);
+        return bonusNumber;
+    }
+
     private static int validateNumber(String lottoPrice) {
         try {
             return Integer.parseInt(lottoPrice);
         } catch (NumberFormatException e) {
-            throw new ExceptionWithMessage(INVALID_PRICE.toString());
+            throw new ExceptionWithMessage(NUMBER_ALLOWED.toString());
         }
     }
 
     private static void validatePositiveNumber(int lottoPriceNumber) {
         if (lottoPriceNumber <= ZERO) {
-            throw new ExceptionWithMessage(INVALID_PRICE.toString());
+            throw new ExceptionWithMessage(POSITIVE_NUMBER_ALLOWED.toString());
         }
     }
 
@@ -67,6 +79,12 @@ public class UserInputValidator {
         Matcher matcher = pattern.matcher(lottoNumbers);
         if (!matcher.matches()) {
             throw new ExceptionWithMessage(INVALID_LOTTO_NUMBERS_FORMAT.toString());
+        }
+    }
+
+    private static void validateNumberRange(int number) {
+        if (number < MIN_NUMBER || number > MAX_NUMBER) {
+            throw new ExceptionWithMessage(INVALID_BONUS_NUMBER.toString());
         }
     }
 }
