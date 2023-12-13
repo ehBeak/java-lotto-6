@@ -5,6 +5,7 @@ import lotto.model.Lotteries;
 import lotto.model.Lotto;
 import lotto.model.PrizeLotto;
 import lotto.model.WinningRule;
+import lotto.util.ProfitCalculator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -26,5 +27,7 @@ public class LottoController {
         PrizeLotto prizeLotto = inputView.inputBonusNumber(lotto);
         Map<WinningRule, Long> countResult = WinningRule.countResult(prizeLotto, lotteries);
         outputView.printPrizeResult(countResult);
+        Double profitRate = ProfitCalculator.calculateProfit(countResult, lotteries.getIssuedLotteries());
+        outputView.printProfitRate(profitRate);
     }
 }

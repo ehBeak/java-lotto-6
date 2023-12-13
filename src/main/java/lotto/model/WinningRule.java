@@ -50,4 +50,8 @@ public enum WinningRule {
 
         return stringBuilder.toString();
     }
+
+    public Integer getPrizeAmount() {
+        return prizeAmount;
+    }
 }
