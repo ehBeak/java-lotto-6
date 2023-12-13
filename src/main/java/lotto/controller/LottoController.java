@@ -1,8 +1,10 @@
 package lotto.controller;
 
+import java.util.Map;
 import lotto.model.Lotteries;
 import lotto.model.Lotto;
 import lotto.model.PrizeLotto;
+import lotto.model.WinningRule;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -22,5 +24,7 @@ public class LottoController {
         outputView.printLotteriesNumber(lotteries.getIssuedLottoNumbers());
         Lotto lotto = inputView.inputPrizeLottoNumbers();
         PrizeLotto prizeLotto = inputView.inputBonusNumber(lotto);
+        Map<WinningRule, Long> countResult = WinningRule.countResult(prizeLotto, lotteries);
+        outputView.printPrizeResult(countResult);
     }
 }
