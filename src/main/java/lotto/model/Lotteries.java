@@ -19,4 +19,8 @@ public class Lotteries {
                 .map(Lotto::getLottoNumbers)
                 .toList();
     }
+
+    public List<Lotto> getLotteries() {
+        return lotteries;
+    }
 }

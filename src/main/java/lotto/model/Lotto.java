@@ -59,4 +59,8 @@ public class Lotto {
                 .map(String::valueOf)
                 .toList();
     }
+
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
 }

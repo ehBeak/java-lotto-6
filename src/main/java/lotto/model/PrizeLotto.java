@@ -15,6 +15,17 @@ public class PrizeLotto {
         this.bonusNumber = bonusNumber;
     }
 
+    public long countMatchNumber(Lotto lotto) {
+        return prizeLotto.getNumbers()
+                .stream()
+                .filter(lotto::containsNumber)
+                .count();
+    }
+
+    public Boolean isMatchBonus(Lotto lotto) {
+        return lotto.containsNumber(bonusNumber);
+    }
+
     private void validateDuplicateNumber(Lotto prizeLotto, Integer bonusNumber) {
         if (prizeLotto.containsNumber(bonusNumber)) {
             throw new ExceptionWithMessage(INVALID_BONUS_NUMBER.toString());
