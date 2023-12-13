@@ -6,6 +6,7 @@ import lotto.model.Lotto;
 import lotto.model.PrizeLotto;
 import lotto.model.WinningRule;
 import lotto.util.ProfitCalculator;
+import lotto.util.Retry;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -20,11 +21,11 @@ public class LottoController {
     }
 
     public void generateLotto() {
-        Lotteries lotteries = inputView.inputLottoPrice();
+        Lotteries lotteries = Retry.retryOnException(inputView::inputLottoPrice);
         outputView.printLottoCount(lotteries.getIssuedLotteries());
         outputView.printLotteriesNumber(lotteries.getIssuedLottoNumbers());
-        Lotto lotto = inputView.inputPrizeLottoNumbers();
-        PrizeLotto prizeLotto = inputView.inputBonusNumber(lotto);
+        Lotto lotto = Retry.retryOnException(inputView::inputPrizeLottoNumbers);
+        PrizeLotto prizeLotto = Retry.retryOnException(() -> inputView.inputBonusNumber(lotto));
         Map<WinningRule, Long> countResult = WinningRule.countResult(prizeLotto, lotteries);
         outputView.printPrizeResult(countResult);
         Double profitRate = ProfitCalculator.calculateProfit(countResult, lotteries.getIssuedLotteries());
