@@ -1,16 +1,18 @@
 package lotto.model;
 
+import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.function.BiPredicate;
+import lotto.exception.ExceptionWithMessage;
 
 public enum WinningRule {
 
-    FIFTH_PRIZE((bonusMatch, count) -> bonusMatch.equals(false) && (count.equals(3L)), 5_000, 3),
-    FOURTH_PRIZE((bonusMatch, count) -> bonusMatch.equals(false) && (count.equals(4L)), 50_000, 4),
-    THIRD_PRIZE((bonusMatch, count) -> bonusMatch.equals(false) && (count.equals(5L)), 1_500_000, 5),
-    SECOND_PRIZE((bonusMatch, count) -> bonusMatch.equals(true) && (count.equals(5L)), 30_000_000, 5),
-    FIRST_PRIZE((bonusMatch, count) -> bonusMatch.equals(false) && (count.equals(6L)), 2_000_000_000, 6);
+    FIFTH_PRIZE((bonusMatch, count) -> count == 3, 5_000, 3),
+    FOURTH_PRIZE((bonusMatch, count) -> count == 4, 50_000, 4),
+    THIRD_PRIZE((bonusMatch, count) -> !bonusMatch && count == 5, 1_500_000, 5),
+    SECOND_PRIZE((bonusMatch, count) -> bonusMatch && count == 5, 30_000_000, 5),
+    FIRST_PRIZE((bonusMatch, count) -> count == 6, 2_000_000_000, 6);
 
     private final BiPredicate<Boolean, Long> biPredicate;
     private final Integer prizeAmount;
@@ -33,6 +35,13 @@ public enum WinningRule {
             prizeResult.put(winningRule, count);
         }
         return prizeResult;
+    }
+
+    public static WinningRule valueOf(Boolean hasBonusNumber, Long countMatchNumber) {
+        return Arrays.stream(WinningRule.values())
+                .filter(lottoPrize -> lottoPrize.biPredicate.test(hasBonusNumber, countMatchNumber))
+                .findAny()
+                .orElseThrow(() -> new ExceptionWithMessage("[ERROR] 보너스 넘버와 로또에 맞는 등수가 없습니다."));
     }
 
     private static boolean isMatch(PrizeLotto prizeLotto, WinningRule winningRule, Lotto lotto) {
